@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/weather-dashboard/static/css/main.ba1d6e6d.css",
+    "main.js": "/weather-dashboard/static/js/main.bc6de03c.js",
+    "static/media/night-cloudy.jpg": "/weather-dashboard/static/media/night-cloudy.2a2c234deda2f216912c.jpg",
+    "static/media/day-cloudy.jpg": "/weather-dashboard/static/media/day-cloudy.1b25be6a39cf94e357cf.jpg",
+    "static/media/day-clear.jpg": "/weather-dashboard/static/media/day-clear.9209df0f58a29beac094.jpg",
+    "static/media/day-rainy.jpg": "/weather-dashboard/static/media/day-rainy.9e78132ab6dc7eaa5187.jpg",
+    "static/media/night-clear.jpg": "/weather-dashboard/static/media/night-clear.a5f852d82270ebba36b2.jpg",
+    "static/media/night-rain.jpg": "/weather-dashboard/static/media/night-rain.8f121cceadf79c56d4bd.jpg",
+    "static/media/homepage-2.jpg": "/weather-dashboard/static/media/homepage-2.5affc9be22a9e3011971.jpg",
+    "index.html": "/weather-dashboard/index.html",
+    "main.ba1d6e6d.css.map": "/weather-dashboard/static/css/main.ba1d6e6d.css.map",
+    "main.bc6de03c.js.map": "/weather-dashboard/static/js/main.bc6de03c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba1d6e6d.css",
+    "static/js/main.bc6de03c.js"
+  ]
+}
