@@ -5,16 +5,24 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [history, setHistory] = useState([]);
+  const [forecast, setForecast] = useState([]);
+  const [isNight, setIsNight] = useState(false);
 
-
-  const apiKey = '1dd4a6b2d52296c07031093361951f4d'; // Replace this later with your real key
+  const [bgClass, setBgClass] = useState('default');//background change krne k liye
+  const apiKey = '1dd4a6b2d52296c07031093361951f4d'; 
 
   const getWeather = async () => {
     if (!city) return;
     setLoading(true);
     setError('');
     setWeather(null);
-  
+    setForecast([]);
+    setHistory(prev => {
+      const updated = [city, ...prev.filter(c => c.toLowerCase() !== city.toLowerCase())];
+      return updated.slice(0, 5);
+    });
+    
     try {
       const apiKey = "1dd4a6b2d52296c07031093361951f4d";
       const res = await fetch(
@@ -24,11 +32,48 @@ function App() {
 
     if (res.ok) {
       setWeather(data);
+      const isNightTime = data.dt < data.sys.sunrise || data.dt > data.sys.sunset;
+      setIsNight(isNightTime);
+      const condition = data.weather[0].main.toLowerCase();
+
+let bg = "";
+
+if (isNightTime) {
+  if (condition.includes("clear")) bg = "night-clear";
+  else if (condition.includes("cloud")) bg = "night-cloudy";
+  else if (condition.includes("rain")) bg = "night-rain";
+  else bg = "night-default";
+} else {
+  if (condition.includes("clear")) bg = "day-clear";
+  else if (condition.includes("cloud")) bg = "day-cloudy";
+  else if (condition.includes("rain")) bg = "day-rain";
+  else bg = "day-default";
+}
+
+setBgClass(bg);
+setIsNight(isNightTime);
+      // const condition = data.weather[0].main.toLowerCase();
+      // if (condition.includes("cloud")) setBgClass("cloudy");
+      // else if (condition.includes("rain")) setBgClass("rainy");
+      // else if (condition.includes("clear")) setBgClass("sunny");
+      // else if (condition.includes("snow")) setBgClass("snowy");
+      // else setBgClass("default");
     } else {
-      setError("Sorry, city not found ☹️");
+      setError("Sorry, city not found");
     }
   } catch (err) {
     setError("Failed to fetch weather data. Please check your connection ☁️");
+  }
+  const forecastRes = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+  );
+  const forecastData = await forecastRes.json();
+
+  if (forecastRes.ok) {
+    const dailyForecasts = forecastData.list.filter((item, index) => index % 8 === 0);
+    setForecast(dailyForecasts);
+  } else {
+    console.warn("Forecast fetch failed");
   }
 
   setLoading(false);
@@ -36,8 +81,8 @@ function App() {
   
 
   return (
-    <div className="app-container">
-      <h1 className="title">Weather Dashboard 🌤️</h1>
+    <div className={`app-container ${bgClass}`}>
+      <h1 className="title">Weather Dashboard </h1>
       <input
         type="text"
         placeholder="Enter city name"
@@ -48,8 +93,22 @@ function App() {
       <button onClick={getWeather} className="weather-button">Get Weather</button>
       {loading && <p>Loading weather data...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {weather && weather.main && (
-        
+      {history.length > 0 && (
+  <div className="history">
+    <h3>Recent Searches</h3>
+    <ul>
+      {history.map((c, index) => (
+        <li key={index} onClick={() => setCity(c)}>{c}</li>
+      ))}
+    </ul>
+  </div>
+)}
+{weather && (
+  <p style={{ fontSize: "18px", marginTop: "10px" }}>
+    {isNight ? "🌙 It's night time" : "☀️ It's day time"} in <strong>{weather.name}</strong>
+  </p>
+)}
+      {weather && weather.main && ( 
   <div className="weather-card">
     <h2>{weather.name}</h2>
     <img
@@ -62,6 +121,25 @@ function App() {
     <p><strong>Wind Speed:</strong> {weather.wind.speed} km/h</p>
   </div>
 )}
+{forecast.length > 0 && (
+  <div className="forecast">
+    <h3>5-Day Forecast</h3>
+    <div className="forecast-grid">
+      {forecast.map((item, index) => (
+        <div key={index} className="forecast-day">
+          <p><strong>{item.dt_txt.split(' ')[0]}</strong></p>
+          <img
+            src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+            alt="icon"
+          />
+          <p>{item.weather[0].main}</p>
+          <p>{item.main.temp} °C</p>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
 
     </div>
   );

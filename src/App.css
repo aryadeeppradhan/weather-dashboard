@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+body {
+  margin: 0;
+  font-family:'Poppins', sans-serif;
+  background-color: #f3f4f6;
+}
 .app-container {
   display: flex;
   flex-direction: column;
@@ -5,9 +11,65 @@
   justify-content: flex-start;
   height: 100vh;
   padding-top: 50px;
-  font-family: Arial, sans-serif;
+  transition: background 0.4s ease;
+}
+.sunny {
+  background: linear-gradient(to top, #fceabb, #f8b500);
 }
 
+.cloudy {
+  background: linear-gradient(to top, #d7d2cc, #304352);
+}
+
+.rainy {
+  background: linear-gradient(to top, #4e54c8, #8f94fb);
+}
+
+.snowy {
+  background: linear-gradient(to top, #e0eafc, #cfdef3);
+}
+.default {
+  background: linear-gradient(to top, #f3f4f6, #e2e2e2);
+}
+
+.night-clear {
+  background: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.night-cloudy {
+  background: url('https://images.unsplash.com/photo-1611039639757-3e2a3b2350b1?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.night-rainy {
+  background: url('https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.night-default {
+  background-color: #0a0a0a;
+}
+
+
+.day-clear {
+  background: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.day-cloudy {
+  background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.day-rainy {
+  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.day-default {
+  background-color: #dce5f1;
+}
 .title {
   font-size: 2.5rem;
   margin-bottom: 30px;
@@ -50,5 +112,126 @@
 .weather-card img {
   width: 100px;
   height: 100px;
+}
+
+.history {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.history h3 {
+  margin-bottom: 10px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history li {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #eee;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.history li:hover {
+  background-color: #ddd;
+}
+
+.forecast {
+  margin-top: 30px;
+}
+
+.forecast-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.forecast-day {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  width: 120px;
+}
+/* ##########responsiveness#############*/
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .search-bar {
+    width: 95%;
+    font-size: 14px;
+  }
+
+  .weather-button {
+    width: 95%;
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 5px;
+  }
+
+  .weather-card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .forecast-grid {
+    gap: 10px;
+  }
+
+  .forecast-day {
+    width: 90px;
+    padding: 10px;
+  }
+
+  .history {
+    width: 95%;
+  }
+
+  .history li {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .search-bar,
+  .weather-button,
+  .weather-card,
+  .history {
+    width: 80%;
+  }
+
+  .forecast-day {
+    width: 110px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .search-bar {
+    width: 400px;
+  }
+
+  .weather-button {
+    width: auto;
+  }
+
+  .weather-card {
+    width: 400px;
+  }
+
+  .forecast-day {
+    width: 120px;
+  }
+
+  .history {
+    width: 400px;
+  }
 }
 
