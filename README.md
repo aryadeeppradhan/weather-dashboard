@@ -9,4 +9,4 @@ A responsive weather dashboard built using **React** and **OpenWeatherMap API** 
 - 🧠 See recent search history
 - 🎯 Responsive design — works on mobile and desktop
 
-Url for website is
+Url for website is https://aryadeeppradhan.github.io/weather-dashboard/
