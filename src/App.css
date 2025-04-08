@@ -8,12 +8,13 @@ form {/*just for get weather button to adjust*/
   width: 100%;
   max-width: 500px;
 }
+
 .app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  height: 100vh;
+  justify-content: start;
+  height: 92.86vh;
   padding-top: 50px;
   transition: color 0.3s ease;
 }
@@ -35,7 +36,12 @@ form {/*just for get weather button to adjust*/
   border: 1px solid white;
 }
 
-
+.default {
+  background: url('/public/images/homepage-2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
 .night-clear {
   background: url('/public/images/night-clear.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -100,15 +106,17 @@ form {/*just for get weather button to adjust*/
 .weather-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4db8ff;
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .weather-button:hover {
-  background-color: #3399ff;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 20px rgba(123, 0, 255, 0.4);
 }
 
 .weather-card {

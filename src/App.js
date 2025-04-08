@@ -9,7 +9,6 @@ function App() {
   const [forecast, setForecast] = useState([]);
   const [fontColor, setFontColor] = useState('black');
   const [isNight, setIsNight] = useState(false);
-
   const [bgClass, setBgClass] = useState('default');//background change krne k liye
   const apiKey = '1dd4a6b2d52296c07031093361951f4d'; 
 
@@ -33,14 +32,14 @@ function App() {
 
     if (res.ok) {
       setWeather(data);
-      const isNightTime = data.dt < data.sys.sunrise || data.dt > data.sys.sunset;
-      setIsNight(isNightTime);
-      setFontColor(isNightTime ? 'white' : 'black');
+      const isNT = data.dt < data.sys.sunrise || data.dt > data.sys.sunset;
+      setIsNight(isNT);
+      setFontColor(isNT ? 'white' : 'black');
       const condition = data.weather[0].main.toLowerCase();
 
 let bg = "";
 
-if (isNightTime) {
+if (isNT) {
   if (condition.includes("clear")) bg = "night-clear";
   else if (condition.includes("cloud")) bg = "night-cloudy";
   else if (condition.includes("rain")) bg = "night-rain";
@@ -53,7 +52,7 @@ if (isNightTime) {
 }
 
 setBgClass(bg);
-setIsNight(isNightTime);
+setIsNight(isNT);
       // const condition = data.weather[0].main.toLowerCase();
       // if (condition.includes("cloud")) setBgClass("cloudy");
       // else if (condition.includes("rain")) setBgClass("rainy");
