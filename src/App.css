@@ -4,6 +4,10 @@ body {
   font-family:'Poppins', sans-serif;
   background-color: #f3f4f6;
 }
+form {/*just for get weather button to adjust*/
+  width: 100%;
+  max-width: 500px;
+}
 .app-container {
   display: flex;
   flex-direction: column;
@@ -11,39 +15,39 @@ body {
   justify-content: flex-start;
   height: 100vh;
   padding-top: 50px;
-  transition: background 0.4s ease;
+  transition: color 0.3s ease;
 }
-.sunny {
-  background: linear-gradient(to top, #fceabb, #f8b500);
+.top-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.top-section.night-text {
+  color: white;
 }
 
-.cloudy {
-  background: linear-gradient(to top, #d7d2cc, #304352);
+.top-section.night-text input,
+.top-section.night-text button {
+  color: white;
+  background-color: #333;
+  border: 1px solid white;
 }
 
-.rainy {
-  background: linear-gradient(to top, #4e54c8, #8f94fb);
-}
-
-.snowy {
-  background: linear-gradient(to top, #e0eafc, #cfdef3);
-}
-.default {
-  background: linear-gradient(to top, #f3f4f6, #e2e2e2);
-}
 
 .night-clear {
-  background: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/night-clear.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .night-cloudy {
-  background: url('https://images.unsplash.com/photo-1611039639757-3e2a3b2350b1?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/night-cloudy.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .night-rainy {
-  background: url('https://images.unsplash.com/photo-1527766833261-b09c3163a791?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/night-rain.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -53,23 +57,31 @@ body {
 
 
 .day-clear {
-  background: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/day-clear.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .day-cloudy {
-  background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/day-cloudy.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .day-rainy {
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background: url('/public/images/day-rainy.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 .day-default {
   background-color: #dce5f1;
 }
+.night-text {
+  color: white;
+}
+
+.day-text {
+  color: black;
+}
+
 .title {
   font-size: 2.5rem;
   margin-bottom: 30px;
@@ -116,7 +128,13 @@ body {
 
 .history {
   margin-top: 20px;
-  text-align: left;
+  width: 90%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  color: black; 
 }
 
 .history h3 {
@@ -130,10 +148,11 @@ body {
 
 .history li {
   cursor: pointer;
-  padding: 5px 10px;
-  background-color: #eee;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  color: black;  
+  margin-bottom: 6px;
+  border-radius: 6px;
   transition: background 0.3s;
 }
 
@@ -159,6 +178,7 @@ body {
   text-align: center;
   width: 120px;
 }
+
 /* ##########responsiveness#############*/
 @media screen and (max-width: 480px) {
   .title {

@@ -7,6 +7,7 @@ function App() {
   const [error, setError] = useState('');
   const [history, setHistory] = useState([]);
   const [forecast, setForecast] = useState([]);
+  const [fontColor, setFontColor] = useState('black');
   const [isNight, setIsNight] = useState(false);
 
   const [bgClass, setBgClass] = useState('default');//background change krne k liye
@@ -34,6 +35,7 @@ function App() {
       setWeather(data);
       const isNightTime = data.dt < data.sys.sunrise || data.dt > data.sys.sunset;
       setIsNight(isNightTime);
+      setFontColor(isNightTime ? 'white' : 'black');
       const condition = data.weather[0].main.toLowerCase();
 
 let bg = "";
@@ -81,8 +83,11 @@ setIsNight(isNightTime);
   
 
   return (
+    // <div className={`app-container ${bgClass} ${fontColor === 'white' ? 'text-white' : 'text-black'}`}>
     <div className={`app-container ${bgClass}`}>
+      <div className={`top-section ${isNight ? 'night-text' : ''}`}>
       <h1 className="title">Weather Dashboard </h1>
+      <form onSubmit={(e) => { e.preventDefault(); getWeather(); }}>
       <input
         type="text"
         placeholder="Enter city name"
@@ -91,6 +96,7 @@ setIsNight(isNightTime);
         className="search-bar"
       />
       <button onClick={getWeather} className="weather-button">Get Weather</button>
+      </form>
       {loading && <p>Loading weather data...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {history.length > 0 && (
@@ -108,6 +114,7 @@ setIsNight(isNightTime);
     {isNight ? "🌙 It's night time" : "☀️ It's day time"} in <strong>{weather.name}</strong>
   </p>
 )}
+</div>
       {weather && weather.main && ( 
   <div className="weather-card">
     <h2>{weather.name}</h2>
